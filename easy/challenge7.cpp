@@ -11,9 +11,26 @@
 using namespace std;
 
 string SimpleSymbols(string str) {
+    string boolean = "false";
+    
+    for(int counter=0; counter < str.length();counter++)
+    {
+        if(isalpha(str[counter]))
+        {
+            if(counter == 0 || counter == str.length()-1)
+                return boolean;
+            else if( str[counter-1] != '+' && str[counter+1] != '+')
+            {
+    
+                return boolean;
+            }
+        }
+    }
+    
+    boolean = "true";
     
     // code goes here
-    return str;
+    return boolean;
     
 }
 
