@@ -9,8 +9,10 @@ using namespace std;
 
 int FirstFactorial(int num) {
     
-    // code goes here
-    return num;
+    if(num ==1)
+        return 1;
+    
+    return num * FirstFactorial(num-1);
     
 }
 
