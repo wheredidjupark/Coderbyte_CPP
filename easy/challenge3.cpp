@@ -1,31 +1,10 @@
 #include <iostream>
 #include <cctype>
-using namespace std;
-
-string LongestWord(string sen);
-string FindFirstWord(string sen);
-
-
-int main() {
-    
-    // keep this function call here
-    cout << LongestWord(gets(stdin));
-    return 0;
-    
-}
-
-
-
-
-
-
-#include <iostream>
-#include <cctype>
 #include <string>
 using namespace std;
 
 string LongestWord(string sen);
-string FindFirstWord(string sen);
+string FindWord(string sen, int &sen_pos);
 
 int main() {
     
@@ -37,41 +16,60 @@ int main() {
 
 string LongestWord(string sen)
 {
-    return sen;
+    string largest;
+    string second_largest;
+    
+    int sen_pos = 0;
+    largest = FindWord(sen, sen_pos); //gets the first word...
+
+    while(sen_pos < sen.length())
+    {
+        second_largest = FindWord(sen, sen_pos);
+        
+        if(largest.length() < second_largest.length()) //compares the largest to the "second largest" word. If second largest word is bigger than the largest, replace the largest.
+        {
+            largest = second_largest;
+            second_largest = "";
+        }
+    }
+  
+    
+    return largest;
 }
 
 
-string FindFirstWord(string sen)
+string FindWord(string sen, int &sen_pos)
 {
-    int word_size =0; //size of the first word
-    int word_pos =0;
+    int word_size =0; //size of the word
+    string word;
     
-    int i =0;
-    while(i < sen.length())
+    while(sen_pos < sen.length())
     {
-        if(isalpha(sen[i]))
+        //find word by finding its first letter
+        if(isalpha(sen[sen_pos]))
         {
-            word_pos = i;
-            word_size++;
-            i++;
-            while(i < sen.length())
+            char char1 = sen[sen_pos];
+            word += char1;
+            sen_pos++;
+            while(sen_pos < sen.length())
             {
-                if(isalpha(sen[i]))
+                if(isalpha(sen[sen_pos])) //append the letter to the word until it reaches non-letter
                 {
-                    word_size++;
+                    char1 = sen[sen_pos];
+                    word += char1;
+                    sen_pos++;
                 }
-                else
-                    return sen.substr(word_pos, word_size);
+                else //reaches the non-letter, so the word is completed
+                    return word;
             }
         }
-        //else... continue with the loop
-        i++;
-        
-        
-        
+        else
+        {
+            sen_pos++; //otherwise, continue with the loop
+        }
     }
     
-    return sen.substr(word_pos, word_size);
+    return word;
 }
 
 
