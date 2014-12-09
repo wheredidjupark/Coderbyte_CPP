@@ -5,12 +5,36 @@
  */
 
 #include <iostream>
+#include <cctype>
 using namespace std;
 
 string LetterChanges(string str) {
     
+    string temp;
+    for(int i =0; i < str.length(); i++)
+    {
+        if(isalpha(str[i])) //check whether the character is a alphabetic letter
+        {
+            char character;
+            if(str[i] == 'z')
+            {
+                character = 'a';
+            }
+            else
+            {
+                int letter_int = static_cast<int>(str[i]) +1;
+                character = static_cast<char>(letter_int);
+            }
+            temp += character;
+        }
+        else
+        {
+            char character = str[i];
+            temp += character;
+        }
+    }
     // code goes here
-    return str;
+    return temp;
     
 }
 
