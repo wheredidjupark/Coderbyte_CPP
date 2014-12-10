@@ -2,19 +2,23 @@
  
  Use the Parameter Testing feature in the box below to test your code with different arguments.*/
 #include <iostream>
+#include <string>
 using namespace std;
 
-int TimeConvert(int num) {
+string TimeConvert(int num) {
+    int hour = num/60;
+    int minutes = num%60;
     
-    // code goes here
-    return num;
+    string time = to_string(hour) + ":" + to_string(minutes);
+    return time;
     
 }
 
 int main() {
     
     // keep this function call here
-    cout << TimeConvert(gets(stdin));
+    //    cout << TimeConvert(gets(stdin));
+    cout <<TimeConvert(126);
     return 0;
     
 }
